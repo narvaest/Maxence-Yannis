@@ -7,6 +7,7 @@ typedef struct{
 	char* login;
 	char* password;
 	int type;
+	char* borrow[20];
 }Username;
 
 
@@ -87,14 +88,50 @@ Username* readFile(){
 	fclose(user);
 	return struc;
 }
+
+	
+	
+	
+void newusers(){
+	FILE * new = NULL;
+	new = fopen("userslist.txt", "r+");
+	if(new == NULL){
+		puts("Erreur d'allocation");
+		exit(1);
+	}
+	fseek(new, 0, SEEK_END);
+	if(new == NULL){
+		puts("Erreur d'allocation");
+		exit(2);
+	}
+	char* log = NULL; 
+	char* pw = NULL; 
+//	int* trk = NULL;
+	
+	//SEGMENTATION FAULT
+	
+	puts("Quel est votre login?");
+	scanf("%s", log);
+	fprintf(new, "\n %s", log);
+	puts("Quel est votre mot de passe?");
+	scanf("%s", pw);
+	fprintf(new, "   %s   ", pw);	
+//	puts("Quel est votre profession ? (1 = élèves, 2 = professeur)");
+//	scanf("%d", trk);
+	fclose(new);
+}
+
 	
 int main()
 {
 	Username* tab;
 	tab = readFile();
-	for(int i = 0; i < 5; i++){
-		printf("%s, %s, %d \n", tab[i].login, tab[i].password, tab[i].type);
-	}
+	printf("%d", tab[1].type);
+	int choice = connection();
+	if(choice == 2){
+		
+		newusers();
+	}	
 	return 0;
 }
 
