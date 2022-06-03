@@ -47,15 +47,40 @@ int main()
 	if(session == -1){
 		printf("Login introuvable, fermeture de la session \n");
 		exit(75);
-	}	
-
-	for(int j; j<5; j++){
-		printf("Livre %d : %s de %s \n", j+1 , bat[j].title, bat[j].writer); 
-		
 	}
-	newbooks();
-	searchCategory();
 	
+	
+	int ch = 0;
+	if(tab[session].type == 1){
+		do{
+			ch = menuStudent();	
+			if(ch == 1){
+		// faire fonction emprunter un livre
+				searchCategory();
+			}
+			else if(ch == 2){
+				puts("Pas encore codé");
+			}
+		}while(ch != 3);
+	}
+	else{
+		do{
+			ch = menuTeacher();
+			if(ch == 4){
+				newbooks();
+			}
+			else if(ch == 1){
+		// faire fonction emprunter un livre
+				searchCategory();
+			}
+			else if(ch == 2){
+				puts("Pas encore codé");
+			}
+		}while(ch != 3);
+	}
+		
+
+//	else{ FAIRE FONCTION RENDRE UN LIVRE}
 	return 0;
 }
 
