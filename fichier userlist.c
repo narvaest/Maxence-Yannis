@@ -88,7 +88,7 @@ Username* readFile(){
 	if(struc == NULL){
 		exit(2);
 	}
-	for(int i = 0; i < 2; i++){
+	for(int i = 0; i < 5; i++){
 //		fscanf(user, "%s", struc[i].login);
 		fscanf(user, "%s", tmp);
 		int N = strlen(tmp);
@@ -157,12 +157,30 @@ void newusers(){
 int main()
 {
 	Username* tab;
-	tab = readFile();
-	printf("%d \n", tab[1].type);
 	int choice = connection();
-	if(choice == 2){	
+	if(choice == 2){
 		newusers();
-	}	
+	}
+	tab = readFile();
+	char login[20];
+	char pw[20];
+	int session = -1;
+	puts("Entrer votre login :");
+	scanf("%s", login);
+	puts("Entrez votre mot de passe :");
+	scanf("%s", pw);
+	for(int i = 0; i < 5; i++){
+		if((strcmp(login, tab[i].login)) == 0){
+			puts("Login bon");
+			if((strcmp(pw, tab[i].password)) == 0){
+				session = i;
+				puts("Vous êtes connecté");
+			}
+		}
+	}
+	if(session == -1){
+		printf("Login introuvable, fermeture de la session");
+	}
 	return 0;
 }
 
