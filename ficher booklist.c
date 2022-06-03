@@ -111,16 +111,32 @@ void newbooks(){
 	fclose(news);
 }
 
+void searchCategory(){
+	Book* tab;
+	tab = readBook();
+	char category[50];
+	puts("Quelle catégorie voulez-vous rechercher?");
+	scanf("%s", category);
+	for(int i = 0; i< 5; i++){
+		if(strcmp(category, tab[i].category) == 0){
+			printf("%s %s \n", tab[i].title, tab[i].writer);
+		}
+	}
+}
 
+			
+				
 
 int main()
 {
 	Book* tab; 
 	tab = readBook();
-	for(int i; i<3; i++){
+	for(int i; i<5; i++){
 		printf("Livre %d : %s de %s \n", i+1 , tab[i].title, tab[i].writer); 
+		
 	}
 	newbooks();
+	searchCategory();
 	return 0;
 }
 
