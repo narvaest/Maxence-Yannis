@@ -103,10 +103,26 @@ void searchCategory(){
 	char category[50];
 	puts("Quelle catégorie voulez-vous rechercher?");
 	scanf("%s", category);
+	printf("Livre en lien avec %s :\n", category);
 	for(int i = 0; i< 5; i++){
 		if(strcmp(category, tab[i].category) == 0){
-			printf("%s %s \n", tab[i].title, tab[i].writer);
+			printf("- %s de %s \n", tab[i].title, tab[i].writer);
 		}
 	}
 }
 
+void listBook(){
+	Book* tab;
+	tab = readBook();
+	int choice;
+	puts("Voici la liste des livres : ");
+	for(int i = 0; i<5; i++){
+		printf("%s de %s \n", tab[i].title, tab[i].writer);
+	}
+	puts("Voulez vous trier les livres ? (1 pour oui / 2 pour non)");
+	scanf("%d", &choice);
+	if(choice == 1){
+		searchCategory();
+	}
+}	
+	

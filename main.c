@@ -56,11 +56,12 @@ int main()
 			ch = menuStudent();	
 			if(ch == 1){
 		// faire fonction emprunter un livre
-				searchCategory();
+				listBook();
 			}
 			else if(ch == 2){
 				puts("Pas encore codé");
 			}
+			puts("");
 		}while(ch != 3);
 	}
 	else{
@@ -71,16 +72,14 @@ int main()
 			}
 			else if(ch == 1){
 		// faire fonction emprunter un livre
-				searchCategory();
+				listBook();
 			}
 			else if(ch == 2){
 				puts("Pas encore codé");
 			}
+			puts("");
 		}while(ch != 3);
 	}
-		
-
-//	else{ FAIRE FONCTION RENDRE UN LIVRE}
 	return 0;
 }
 
