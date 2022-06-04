@@ -30,22 +30,25 @@ int main()
 	tab = readFile();
 	char login[20];	
 	char pw[20];
-	int session = -1;
+	int session = -2;
 	puts("Entrer votre login :");
 	scanf("%s", login);
 	puts("Entrez votre mot de passe :");			
 	scanf("%s", pw);
 	for(int i = 0; i < 5; i++){
 		if((strcmp(login, tab[i].login)) == 0){
-			puts("Login bon");
+			session = -1;
 			if((strcmp(pw, tab[i].password)) == 0){
 				session = i;
 				puts("Vous êtes connecté");
 			}
 		}
 	}
-	if(session == -1){
+	if(session == -2){
 		printf("Login introuvable, fermeture de la session \n");
+		exit(74);
+	if(session == -1){
+		printf("Mauvais mot de passe ! Recommencez depuis le début !\n");
 		exit(75);
 	}
 	
