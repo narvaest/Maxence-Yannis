@@ -58,7 +58,7 @@ int main()
 		do{
 			ch = menuStudent();	
 			if(ch == 1){
-		// faire fonction emprunter un livre
+				borrow(tab);
 				listBook();
 			}
 			else if(ch == 2){
@@ -74,7 +74,7 @@ int main()
 				newbooks();
 			}
 			else if(ch == 1){
-		// faire fonction emprunter un livre
+				borrow(tab);
 				listBook();
 			}
 			else if(ch == 2){
