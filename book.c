@@ -126,3 +126,34 @@ void listBook(){
 	}
 }	
 	
+void borrow(Username* user){
+	Book* tab;
+	tab = readBook();
+	char borrow[50];
+	int j = 0;
+	puts("Quel livre souhaitez-vous emprunter ?");
+	scanf("%s", borrow);
+	for (int i = 0; i < 5; i++){
+		if (strcmp(borrow, tab[i].title) != 0){
+			puts("Ce livre n'esxiste pas dans la bibliothèque");
+			exit(20);
+		}
+	}
+	if (tab[i].available == 0){
+		puts("Ce livre est déjà emprunté ! Vous ne pouvez pas le prendre !");
+		exit(21);
+	}
+	tab[i].available == 0;
+	while (user.borrow[j] > 0){
+		j++;
+		if (j >= 5){
+			puts("Vous avez déjà emprunté trop de livres ! Veuillez les rendre avant de vous resservir !");
+			exit(22);
+		}
+	}
+	user.borrow[j] = number;
+	puts("Livre emprunté");
+}
+			
+			
+	
