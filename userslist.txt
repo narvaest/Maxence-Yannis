@@ -1,8 +1,9 @@
-ayraioff	ziefizf	1
-iaqzfoizf	zofpqozie	1
-travail	maison	1
-travailler	maisoner	1
-jspppp	jsppppppp	2
-yannis	etztztz	1
-azjfhaif	iaqzugfoiaf	1
-cristiano	ronaldo	2
+ayraioff	ziefizf	0	0	0	0	0	1
+iaqzfoizf	zofpqozie	0	0	0	0	0	1
+travail	maison	0	0	0	0	0	1
+travailler	maisoner	0	0	0	0	0	1
+jspppp	jsppppppp	0	0	0	0	0	2
+yannis	etztztz	0	0	0	0	0	1
+azjfhaif	iaqzugfoiaf	0	0	0	0	0	1
+cristiano	ronaldo	0	0	0	0	0	2
+trotep	looping	0	0	0	0	0	1

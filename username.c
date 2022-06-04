@@ -7,6 +7,24 @@
 #include <errno.h>  
 
 
+int numberusers(){
+	FILE * user = NULL;
+	user = fopen("userslist.txt", "r+");
+	if(user == NULL){
+		puts("Erreur d'allocation");
+		exit(1);
+	}
+	int number = 0;
+	int c = 0;
+	while((c = fgetc(user)) != EOF){
+		if (c == '\n'){
+			number++;
+		}
+	}
+	fclose(user);
+	return number;
+}
+
 
 Username* readFile(){
 	char tmp[256];
@@ -19,11 +37,12 @@ Username* readFile(){
 		printf("%d : %s", errno, strerror(errno));
 		exit(1);
 	}
-	struc = malloc(5 * sizeof(Username));
+	int nmb = numberusers();
+	struc = malloc(nmb * sizeof(Username));
 	if(struc == NULL){
 		exit(2);
 	}
-	for(int i = 0; i < 5; i++){
+	for(int i = 0; i < nmb; i++){
 		fscanf(user, "%s", tmp);
 		int N = strlen(tmp);
 		struc[i].login = malloc( (N+1) * sizeof(char) );
@@ -38,8 +57,11 @@ Username* readFile(){
 		if(struc[i].password == NULL){
 			puts("Erreur d'allocation");
 			exit(4);
-		}
+		}	
 	    strcpy(struc[i].password , top);
+	    for(int j= 0; j < 5; j++){
+			fscanf(user, "%d", &(struc[i].borrow[j]));
+		}
 		fscanf(user, "%d", &(struc[i].type));
 	}
 	
@@ -61,7 +83,7 @@ void newusers(){
 	int trk = 0;
 	
 	puts("Quel est votre login?");
-	scanf("%s", log);
+	scanf("\n%s", log);
 	flushScanf();
 	fprintf(new, "%s\t", log);
 	
@@ -74,12 +96,15 @@ void newusers(){
 			puts("Erreur d'allocation");
 			exit(74);
 	}
+
+	for(int j = 0; j < 5; j++){
+		fprintf(new, "%d\t", 0);
+	}
 	do{
 		puts("Quel est votre profession ? (1 = élèves, 2 = professeur)");
-		scanf("%d", &trk);
+		scanf("%d\t", &trk);
 		flushScanf();
 	}while(trk > 2 || trk <= 0);
-	fprintf(new, "%d\n", trk);
+	fprintf(new, "%d", trk);
 	fclose(new);
 }
-
