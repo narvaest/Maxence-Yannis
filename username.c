@@ -59,9 +59,6 @@ Username* readFile(){
 			exit(4);
 		}	
 	    strcpy(struc[i].password , top);
-	    for(int j= 0; j < 5; j++){
-			fscanf(user, "%d", &(struc[i].borrow[j]));
-		}
 		fscanf(user, "%d", &(struc[i].type));
 	}
 	
@@ -83,9 +80,9 @@ void newusers(){
 	int trk = 0;
 	
 	puts("Quel est votre login?");
-	scanf("\n%s", log);
+	scanf("%s", log);
 	flushScanf();
-	fprintf(new, "%s\t", log);
+	fprintf(new, "\n%s\t", log);
 	
 	
 	puts("Quel est votre mot de passe?");
@@ -96,13 +93,9 @@ void newusers(){
 			puts("Erreur d'allocation");
 			exit(74);
 	}
-
-	for(int j = 0; j < 5; j++){
-		fprintf(new, "%d\t", 0);
-	}
 	do{
 		puts("Quel est votre profession ? (1 = élèves, 2 = professeur)");
-		scanf("%d\t", &trk);
+		scanf("%d", &trk);
 		flushScanf();
 	}while(trk > 2 || trk <= 0);
 	fprintf(new, "%d", trk);

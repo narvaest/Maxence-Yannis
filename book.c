@@ -44,7 +44,6 @@ Book* readBook(){
 		exit(2);
 	}
 	for(int i = 0; i < nmb; i++){
-		fscanf(paper, "%d", &(struc[i].available));
 		fscanf(paper, "%s", tmp);
 		int N = strlen(tmp);
 		struc[i].title = malloc( (N+1) * sizeof(char) );
@@ -90,23 +89,24 @@ void newbooks(){
 	char wri[50]; 
 	int nmb = 0;
 	char cat[50];
-	fprintf(news, "%d\t", nmb);
-	
+	puts("****************************************");
 	puts("Quel est votre livre?");
 	scanf("%s", tit);
 	flushScanf();
 	fprintf(news, "%s\t", tit);
 	
-	
+	puts("****************************************");
 	puts("Quel est l'auteur?");
 	scanf("%s", wri);
 	flushScanf();
 	fprintf(news, "%s\t", wri);
 	
+	puts("****************************************");
 	puts("Quel est la catégorie?");
 	scanf("%s", cat);
 	flushScanf();
 	fprintf(news, "%s\t", cat);
+	puts("****************************************");
 	
 	nmb = numberbooks();
 	fprintf(news, "%d\n", nmb+1);
@@ -115,33 +115,36 @@ void newbooks(){
 	fclose(news);
 }
 
-
-
+//Emprunter un livre -> Recherche de livre par catégorie
 void searchCategory(int nmb){
 	Book* tab;
 	tab = readBook();
 	char category[50];
 	puts("Quelle catégorie voulez-vous rechercher?");
 	scanf("%s", category);
+	puts("****************************************");
 	printf("Livre en lien avec %s :\n", category);
 	for(int i = 0; i< nmb; i++){
 		if(strcmp(category, tab[i].category) == 0){
 			printf("- %s de %s \n", tab[i].title, tab[i].writer);
 		}
 	}
+	puts("****************************************");
 }
-
+//Emprunter un livre -> Liste des livres disponibles
 void listBook(int nmb){
 	Book* tab;
 	tab = readBook();
-	puts("Voici la liste des livres disponibles: ");
+	puts("****************************************\nVoici la liste des livres disponibles: \n");
 	for(int i = 0; i<nmb; i++){
 		if(tab[i].available == 0){
-			printf("%s de %s \n", tab[i].title, tab[i].writer);
+			printf("- %s de %s \n", tab[i].title, tab[i].writer);
 		}
 	}
+	puts("****************************************");
 }	
 
+//Emprunter un livre -> Emprunt
 void borrow(){
 	Username* user;
 	user = readFile();
@@ -155,43 +158,33 @@ void borrow(){
 	for(int i = 0; i < nmb; i++){
 		if(strcmp(books, tab[i].title) == 0){
 			if(tab[i].available == 0){
-				FILE* paper = NULL;
-				fopen = fopen("Booklist.txt", "a");
-					if(paper == NULL){
-						puts("Erreur d'allocation");
-						exit(1);
-					}
-				tab[i].available == 1;
-				
-				
-				
-				
-				
-				
-				
-				fclose(paper);
+				int res = 0;
 				while(user->borrow[j] > 0){
-					j++;
 					if (j >= 5){
 						puts("Vous avez déjà emprunté trop de livres ! Veuillez les rendre avant de vous resservir !");
-						exit(22);
+						res = res + 1;
 					}
+					j++;
 				}
-				user->borrow[j] = tab[i].number;
-				puts("Livre emprunté");
+				if(res == 0){
+					user->borrow[j] = tab[i].number;
+					puts("Livre emprunté");
+					tab[i].available == 1;
+				}
 			}
 		}
 	}
-	
-//	puts("Ce livre est déjà emprunté ou n'existe pas");
 }		
 
+
+//MENU "Emprunter un livre"
 void booking(){
 	Book* tab;
 	tab = readBook();
 	int nmb = numberbooks();
 	int choice;
-	puts("1.Liste des livres disponibles \n2.Recherche de livre par catégorie \n3.Emprunt \n");
+	puts("****************************************");
+	puts("1.Liste des livres disponibles \n2.Recherche de livre par catégorie \n(3.Emprunt) -pas réussi");
 	do{
 		scanf("%d", &choice);
 		flushScanf();
@@ -206,3 +199,18 @@ void booking(){
 		borrow();
 	}
 }
+
+//Rendre un livre
+void giveback(int session){
+	Username* user;
+	user = readFile();
+	Book* tab;
+	tab = readBook();
+	puts("Lequel voulez-vous rendre ?");
+	int res;
+	scanf("%d", &res);
+	int k = user[session].borrow[res];
+	tab[k+1].available = 0;
+	user[session].borrow[res] = 0;
+	puts("Livre bien rendu ! \n"); 	
+}		

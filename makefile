@@ -12,7 +12,7 @@ username.o : username.c
 book.o : book.c 
 	gcc -c book.c -o book.o
 
-exec : main.o menu.o username.o book.o
+exec : main.o menu.o username.o book.o 
 	gcc book.o main.o menu.o username.o -o exec
 
 clean :

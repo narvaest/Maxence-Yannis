@@ -20,6 +20,7 @@ int main()
 	char login[20];	
 	char pw[20];
 	int session = -1;
+	int res = 0;
 	puts("Entrer votre login :");
 	scanf("%s", login);
 	puts("Entrez votre mot de passe :");			
@@ -27,28 +28,32 @@ int main()
 	int number = numberusers();
 	for(int i = 0; i < number; i++){
 		if((strcmp(login, tab[i].login)) == 0){
-			puts("Login bon");
+			res = 1;
 			if((strcmp(pw, tab[i].password)) == 0){
 				session = i;
-				puts("Vous êtes connecté");
+				puts("Vous êtes connecté ! \n");
 			}
 		}
 	}
 	if(session == -1){
-		printf("Login introuvable, fermeture de la session \n");
-		exit(75);
+		if(res == 0){
+			puts("Login introuvable, fermeture de la session ");
+			exit(75);
+		}
+		puts("Mauvais mot de passe associé au login, fermeture de la session");
+		exit(76);
 	}
-	
+
 	int ch = 0;
+	printf("****************************************\nBienvenue %s dans votre session \n****************************************\n", tab[session].login);
 	if(tab[session].type == 1){
 		do{
 			ch = menuStudent();	
 			if(ch == 1){
-		// faire fonction emprunter un livre
 				booking();
 			}
 			else if(ch == 2){
-				puts("Pas encore codé");
+				giveback(session);
 			}
 			puts("");
 		}while(ch != 3);
@@ -60,11 +65,10 @@ int main()
 				newbooks();
 			}
 			else if(ch == 1){
-		// faire fonction emprunter un livre
 				booking();
 			}
 			else if(ch == 2){
-				puts("Pas encore codé");
+				giveback(session);
 			}
 			puts("");
 		}while(ch != 3);

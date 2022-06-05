@@ -16,7 +16,7 @@ void flushScanf(){
 int menuStudent(){
 	puts("Quelle action voulez vous faire?");
 	puts("1.Emprunter un livre");
-	puts("2.Rendre un livre");
+	puts("(2.Rendre un livre) - pas réussi");
 	puts("3.Se déconnecter");
 	int res = 0;
 	do{
@@ -29,7 +29,7 @@ int menuStudent(){
 int menuTeacher(){
 	puts("Quelle action voulez vous faire?");
 	puts("1.Emprunter un livre");
-	puts("2.Rendre un livre");
+	puts("(2.Rendre un livre) - pas réussi");
 	puts("3.Se déconnecter");
 	puts("4.Ajouter un livre");
 	int res = 0;
